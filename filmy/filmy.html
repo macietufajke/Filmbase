@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FilmBase - Dashboard</title>
+    <link rel="stylesheet" href="styl.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <!-- Plyr CSS -->
+    <link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
+    <!-- HLS.js -->
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+    <!-- Plyr JS -->
+    <script src="https://cdn.plyr.io/3.7.8/plyr.polyfilled.js"></script>
+    <script src="script.js" defer></script>
+</head>
+
+<body>
+
+    <div class="app-container">
+
+        <!-- SIDEBAR (TABS) -->
+        <aside class="sidebar">
+            <div class="logo">
+                <span class="logo-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"></rect>
+                        <line x1="7" y1="2" x2="7" y2="22"></line>
+                        <line x1="17" y1="2" x2="17" y2="22"></line>
+                        <line x1="2" y1="12" x2="22" y2="12"></line>
+                        <line x1="2" y1="7" x2="7" y2="7"></line>
+                        <line x1="2" y1="17" x2="7" y2="17"></line>
+                        <line x1="17" y1="17" x2="22" y2="17"></line>
+                        <line x1="17" y1="7" x2="22" y2="7"></line>
+                    </svg>
+                </span> FilmBase
+            </div>
+
+            <nav class="sidebar-nav">
+                <a href="#" class="sidebar-link active" data-category="home">
+                    <span class="icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                            <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                        </svg>
+                    </span> Strona Główna
+                </a>
+                <a href="#" class="sidebar-link" data-category="popular">
+                    <span class="icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline>
+                            <polyline points="17 6 23 6 23 12"></polyline>
+                        </svg>
+                    </span> Popularne
+                </a>
+                <a href="#" class="sidebar-link" data-category="top_rated">
+                    <span class="icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polygon
+                                points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2">
+                            </polygon>
+                        </svg>
+                    </span> Najwyżej Oceniane
+                </a>
+                <a href="#" class="sidebar-link" data-category="upcoming">
+                    <span class="icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                            <line x1="16" y1="2" x2="16" y2="6"></line>
+                            <line x1="8" y1="2" x2="8" y2="6"></line>
+                            <line x1="3" y1="10" x2="21" y2="10"></line>
+                        </svg>
+                    </span> Nadchodzące
+                </a>
+                <a href="#" class="sidebar-link" data-category="trending">
+                    <span class="icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path>
+                        </svg>
+                    </span> Na Topie
+                </a>
+
+
+                <div class="sidebar-divider"
+                    style="margin: 20px 0 10px; border-bottom: 1px solid var(--glass-border); opacity: 0.5;"></div>
+                <div class="sidebar-title" id="category-toggle">
+                    <span>Kategorie</span>
+                    <svg class="dropdown-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="6 9 12 15 18 9"></polyline>
+                    </svg>
+                </div>
+
+                <div class="sidebar-submenu" id="category-submenu">
+                    <a href="#" class="sidebar-link" data-category="28">
+                        <span class="icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+                            </svg>
+                        </span> Akcja
+                    </a>
+                    <a href="#" class="sidebar-link" data-category="12">
+                        <span class="icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon>
+                            </svg>
+                        </span> Przygodowe
+                    </a>
+                    <a href="#" class="sidebar-link" data-category="35">
+                        <span class="icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <path d="M8 14s1.5 2 4 2 4-2 4-2"></path>
+                                <line x1="9" y1="9" x2="9.01" y2="9"></line>
+                                <line x1="15" y1="9" x2="15.01" y2="9"></line>
+                            </svg>
+                        </span> Komedia
+                    </a>
+                    <a href="#" class="sidebar-link" data-category="18">
+                        <span class="icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"></path>
+                                <line x1="16" y1="8" x2="2" y2="22"></line>
+                                <line x1="17.5" y1="15" x2="9" y2="15"></line>
+                            </svg>
+                        </span> Dramat
+                    </a>
+                    <a href="#" class="sidebar-link" data-category="27">
+                        <span class="icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                            </svg>
+                        </span> Horror
+                    </a>
+                    <a href="#" class="sidebar-link" data-category="878">
+                        <span class="icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <line x1="14.31" y1="8" x2="20.05" y2="17.94"></line>
+                                <line x1="9.69" y1="8" x2="21.17" y2="8"></line>
+                                <line x1="7.38" y1="12" x2="13.12" y2="2.06"></line>
+                                <line x1="9.69" y1="16" x2="3.95" y2="6.06"></line>
+                                <line x1="14.31" y1="16" x2="2.83" y2="16"></line>
+                                <line x1="16.62" y1="12" x2="10.88" y2="21.94"></line>
+                            </svg>
+                        </span> Sci-Fi
+                    </a>
+                </div>
+            </nav>
+
+            <div class="sidebar-footer">
+                <p>&copy; 2026 FilmBase</p>
+            </div>
+        </aside>
+
+        <!-- MAIN CONTENT -->
+        <main class="main-content">
+
+            <!-- HEADER / SEARCH -->
+            <header class="top-bar">
+                <div class="header-left">
+                    <h1 id="main-title">Popularne Filmy</h1>
+
+                    <div class="sort-dropdown">
+                        <button class="sort-btn" id="sort-toggle">
+                            <span>Sortuj według</span>
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <polyline points="6 9 12 15 18 9"></polyline>
+                            </svg>
+                        </button>
+                        <div class="sort-menu" id="sort-menu">
+                            <div class="sort-option active" data-sort="popularity.desc">Popularne</div>
+                            <div class="sort-option" data-sort="vote_average.desc">Najlepiej Oceniane</div>
+                            <div class="sort-option" data-sort="original_title.asc">Alfabetycznie (A-Z)</div>
+                            <div class="sort-option" data-sort="primary_release_date.desc">Najnowsze</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="search-container">
+                    <input type="text" id="search-input" placeholder="Szukaj filmów...">
+                    <button class="search-btn">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                        </svg>
+                    </button>
+                </div>
+            </header>
+
+            <!-- SPOTLIGHT SECTION -->
+            <section class="spotlight-section">
+                <div class="spotlight-card">
+                    <div class="spotlight-backdrop"></div> <!-- Blurred BG -->
+                    <img id="spotlight-img" src="" alt="Spotlight" class="spotlight-image">
+                    <div class="spotlight-content">
+                        <span class="spotlight-badge">Polecany</span>
+                        <h2 id="spotlight-title">Ładowanie...</h2>
+                        <p id="spotlight-desc">Pobieranie danych...</p>
+                        <button class="btn-primary" id="spotlight-info-btn">Więcej informacji</button>
+                    </div>
+                </div>
+            </section>
+
+
+
+            <!-- MOVIES GRID -->
+            <section class="movies-grid-container">
+                <div id="movies-grid" class="movies-grid"></div>
+                <div class="load-more-container">
+                    <button id="load-more-btn" class="btn-primary">Załaduj więcej</button>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- MODAL -->
+    <div id="modal-backdrop" class="modal-backdrop">
+        <div class="modal">
+            <button class="modal-close" id="modal-close-btn">&times;</button>
+
+            <div class="modal-scroll-wrapper">
+                <div class="modal-hero">
+                    <img id="modal-hero-img" src="" alt="">
+                    <div class="modal-hero-overlay"></div>
+
+
+
+                    <div class="modal-title-container">
+                        <h2 id="modal-title"></h2>
+                        <div class="modal-meta-row">
+                            <span id="modal-rating"></span>
+                            <span id="modal-meta"></span>
+                            <span id="modal-runtime"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-content">
+                    <p id="modal-overview"></p>
+
+                    <div class="modal-details-grid">
+                        <div class="detail-item">
+                            <h4>Gatunki</h4>
+                            <div id="modal-genres" class="genres-list"></div>
+                        </div>
+                        <div class="detail-item">
+                            <h4 id="modal-cast">Obsada: ...</h4>
+                        </div>
+                        <div class="detail-item full-width">
+                            <h4>Gdzie obejrzeć (PL):</h4>
+                            <div id="modal-providers" class="providers-list"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Watch Here Dropdown -->
+            <div class="watch-dropdown-container">
+                <button class="watch-btn" id="watch-toggle">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M8 5v14l11-7z" />
+                    </svg>
+                    <span>Oglądaj tutaj</span>
+                    <svg class="arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2">
+                        <polyline points="6 9 12 15 18 9"></polyline>
+                    </svg>
+                </button>
+                <div class="watch-menu" id="watch-menu">
+                    <a href="#" class="watch-option" data-player="lulu">
+                        <span class="player-icon">🥡</span>
+                        LuluStream (PL)
+                    </a>
+                    <a href="#" class="watch-option" data-player="s1">
+                        <span class="player-icon">🎬</span>
+                        VidSrc (Backup)
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
